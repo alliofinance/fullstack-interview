@@ -1,10 +1,7 @@
 "use client";
-import Image from "next/image";
-import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import LineChart, { LineChartProps } from "./LineChart";
 import { ChartDatum, Lookbacks } from "./api/route";
-import BarChart from "./BarChart";
 
 type ChartDataPoints = {
   labels: string[];
@@ -30,7 +27,7 @@ export default function Home() {
   const [chartSelectionType, setChartSelectionType] =
     useState<ChartSelectionType>("price");
   const [lookback, setLookback] = useState<Lookbacks>("1y");
-  const lookbackChoices: Lookbacks[] = ["1m", "3m", "6m", "1y", "5y", "All"];
+  const lookbackChoices: Lookbacks[] = ["1m", "6m", "1y", "5y", "All"];
 
   useEffect(() => {
     fetch(
@@ -52,12 +49,12 @@ export default function Home() {
   }, [tickerSelection, chartSelectionType, lookback]);
 
   return (
-    <main className={styles.main} style={{ marginTop: "100px" }}>
+    <main style={{ marginTop: "100px", marginLeft: "10%", marginRight: "10%" }}>
       {data &&
         (chartSelectionType == "price" ? (
           <LineChart chartData={data.chartData} ticker={data.ticker} />
         ) : (
-          <BarChart chartData={data.chartData} ticker={data.ticker} />
+          <LineChart chartData={data.chartData} ticker={data.ticker} />
         ))}
       <div style={{ display: "flex", justifyContent: "center" }}>
         <button

@@ -1,16 +1,5 @@
 import { getFakeData } from "./do-not-look-at-this";
 
-const ALPHA_API_KEY = "5XZU2IUHUFZ2ZBTV";
-
-// idea: remove this and make them look up the result to find more
-const RESULT_MAP = {
-  open: "1. open",
-  high: "2. high",
-  low: "3. low",
-  close: "4. close",
-  volume: "5. volume",
-};
-
 export type ChartDatum = {
   date: string;
   value: string;
@@ -46,9 +35,6 @@ function getStartDateFromLookback(lookback: Lookbacks): null | Date {
     case "3m":
       startDate.setMonth(startDate.getMonth() - 3);
       break;
-    case "6m":
-      startDate.setMonth(startDate.getMonth() - 6);
-      break;
     case "1y":
       startDate.setFullYear(startDate.getFullYear() - 1);
       break;
@@ -61,9 +47,7 @@ function getStartDateFromLookback(lookback: Lookbacks): null | Date {
 }
 
 export async function GET(request: Request) {
-  // get param ticker off of request query param
   const queryParams = getParams(request);
-  const chartType = queryParams["chartType"];
   const lookback = queryParams["lookback"] as Lookbacks;
   const startDate = getStartDateFromLookback(lookback);
 
@@ -75,8 +59,7 @@ export async function GET(request: Request) {
   Object.entries(res["Time Series (Daily)"]).forEach(([date, data]) => {
     const dataObj = data as Record<string, string>;
     if (startDate && new Date(date) < startDate) return;
-    const dataType =
-      chartType === "price" ? RESULT_MAP.close : RESULT_MAP.volume;
+    const dataType = "4. close"; // TODO: grab other data
 
     chartData.push({ date, value: dataObj[dataType] });
   });

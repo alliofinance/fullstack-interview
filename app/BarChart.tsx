@@ -18,7 +18,7 @@ export type BarChartProps = {
   ticker: string;
 };
 
-function LineChart(props: BarChartProps) {
+function BarChart(props: BarChartProps) {
   const { chartData, ticker } = props;
   return (
     <div className="chart-container">
@@ -40,4 +40,4 @@ function LineChart(props: BarChartProps) {
     </div>
   );
 }
-export default LineChart;
+export default BarChart;
