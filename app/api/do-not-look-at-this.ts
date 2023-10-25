@@ -1,4 +1,4 @@
-export const getFakeData = () => {
+export const getFakeData = (): Promise<any> => {
   const dateData: Record<string, any> = {};
   const startDate = new Date("1999-01-01");
   const endDate = new Date();
@@ -20,7 +20,7 @@ export const getFakeData = () => {
     dateData[formattedDate] = dayData;
   }
 
-  return {
+  return Promise.resolve({
     "Time Series (Daily)": dateData,
-  };
+  });
 };
