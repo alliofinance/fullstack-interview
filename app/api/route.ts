@@ -50,7 +50,7 @@ export async function GET(request: Request) {
   const startDate = getStartDateFromLookback(lookback);
 
   // please do not look into getFakeData -- pretend it's a real API w/ data
-  const res: Record<string, any> = getFakeData();
+  const res = getFakeData();
 
   const chartData: ChartDatum[] = [];
 
