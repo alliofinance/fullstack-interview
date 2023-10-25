@@ -9,7 +9,8 @@ export type ChartResponse = {
   chartData: ChartDatum[];
 };
 
-export type Lookbacks = "1m" | "3m" | "6m" | "1y" | "5y" | "All";
+// TODO: add 3 month
+export type Lookbacks = "1m" | "6m" | "1y" | "5y" | "All";
 
 const getParams = (request: Request): Record<string, string> => {
   const queryParamSection = request.url.split("?")[1];
@@ -31,9 +32,6 @@ function getStartDateFromLookback(lookback: Lookbacks): null | Date {
   switch (lookback) {
     case "1m":
       startDate.setMonth(startDate.getMonth() - 1);
-      break;
-    case "3m":
-      startDate.setMonth(startDate.getMonth() - 3);
       break;
     case "1y":
       startDate.setFullYear(startDate.getFullYear() - 1);

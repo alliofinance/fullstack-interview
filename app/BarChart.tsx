@@ -15,11 +15,11 @@ export type BarChartProps = {
       borderWidth?: number;
     }[];
   };
-  ticker: string;
+  symbol: string;
 };
 
 function BarChart(props: BarChartProps) {
-  const { chartData, ticker } = props;
+  const { chartData, symbol } = props;
   return (
     <div className="chart-container">
       <h2 style={{ textAlign: "center" }}>Volume</h2>
@@ -29,7 +29,7 @@ function BarChart(props: BarChartProps) {
           plugins: {
             title: {
               display: true,
-              text: ticker,
+              text: symbol,
             },
             legend: {
               display: false,
