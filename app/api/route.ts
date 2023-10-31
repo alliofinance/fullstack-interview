@@ -1,4 +1,4 @@
-import { getFakeData } from "./do-not-look-at-this";
+import { getFakeData } from "../../do-not-look-at-this";
 
 export type ChartDatum = {
   date: string;
@@ -50,7 +50,7 @@ export async function GET(request: Request) {
   const startDate = getStartDateFromLookback(lookback);
 
   // please do not look into getFakeData -- pretend it's a real API w/ data
-  const res = getFakeData();
+  const res = await getFakeData();
 
   const chartData: ChartDatum[] = [];
 
